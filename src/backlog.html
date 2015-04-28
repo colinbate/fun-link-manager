@@ -1,0 +1,31 @@
+<template>
+  <section class="add-link ${addLinkState}">
+    <h3>Add Link <button class="btn btn-default btn-sm" click.delegate="closeForm()"><i class="fa fa-close"></i></button></h3>
+
+    <form role="form" submit.delegate="save()">
+      <div class="form-group">
+        <label for="ltitle">Title</label>
+        <input type="text" value.bind="linkVm.name" class="form-control" id="ltitle" placeholder="Title">
+      </div>
+      <div class="form-group">
+        <label for="lurl">URL</label>
+        <input type="text" value.bind="linkVm.url" class="form-control" id="lurl" placeholder="URL">
+      </div>
+      <div class="form-group">
+        <label for="ldesc">Description</label>
+        <textarea value.bind="linkVm.description" class="form-control" id="ldesc"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Save Link</button>
+    </form>
+  </section>
+  <section>
+      <h2>${heading} <button class="btn btn-default" click.delegate="openForm()">Add Link</button></h2>
+      <div class="row">
+        <div class="col-sm-6 col-md-3" repeat.for="link of backlog">
+          <strong>${link.name}</strong><br>
+          <a href.bind="link.url">${link.url}</a><br>
+          <p>${link.description}</p>
+        </div>
+      </div>
+  </section>
+</template>
