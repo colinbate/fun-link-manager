@@ -2,13 +2,16 @@
   <div class="link-picker form-control-static">
     <div class="link-picker-display">
       <ul class="list-group">
-        <li repeat.for="link of selectedLinks" class="list-group-item">${link.name}</li>
+        <li repeat.for="link of selectedLinks" class="list-group-item">
+          <i class="fa fa-bars pull-right"></i>
+          <div>${link.name}</div>
+        </li>
       </ul>
-      <button class="btn btn-default" type="button" click.delegate="addLinks()" show.bind="showAddBtn">Add Links</button>
+      <button class="btn btn-default" type="button" click.delegate="editLinks()" show.bind="showEditBtn">Edit Links</button>
     </div>
-    <div class="link-picker-picker" show.bind="showPicker">
+    <div class="link-picker-picker" show.bind="editMode">
       <div class="list-group">
-        <a role="button" class="list-group-item" repeat.for="link of allLinks" click.delegate="$parent.pick(link)">${link.name}</a>
+        <a role="button" class="list-group-item" repeat.for="link of allLinks" click.delegate="$parent.pick(link)"><i class="fa fa-plus" style="padding-right: 0.5em;"></i> ${link.name}</a>
       </div>
       <button type="button" class="btn btn-default" click.delegate="done()">Done</button>
     </div>

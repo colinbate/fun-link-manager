@@ -7,9 +7,13 @@ export default class Resource {
     this.db = new PouchDb(dbname);
     this.defaultFac = defaultFac;
   }
-  getAll() {
+  getAll(remap = true) {
     return this.db.allDocs({include_docs: true, descending: true}).then(res => {
-       return res.rows.map(r => r.doc);
+      if (remap) {
+        return res.rows.map(r => r.doc);
+      } else {
+        return res.rows;
+      }
     });
   }
   get(id) {
@@ -30,7 +34,10 @@ export default class Resource {
       doc._id = modTime;
     }
     doc.saved = modTime;
+    let meta = doc._;
+    delete doc._;
     return this.db.put(doc).then(res => {
+      doc._ = meta;
       if (res.ok) {
         res.doc = doc;
       }
