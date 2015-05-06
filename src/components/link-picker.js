@@ -7,19 +7,19 @@ import LinkProvider from '../data/links';
   defaultBindingMode: 2
 })
 export class LinkPickerCustomElement {
-  showPicker = false;
-  showAddBtn = true;
+  editMode = false;
+  showEditBtn = true;
   allLinks = [];
 
   constructor(linkSvc) {
     this.linkSvc = linkSvc;
   }
 
-  addLinks() {
+  editLinks() {
     this.linkSvc.getAll().then(links => {
       this.allLinks = links.filter(l => !l.pending);
-      this.showPicker = true;
-      this.showAddBtn = false;
+      this.editMode = true;
+      this.showEditBtn = false;
     });
   }
 
@@ -33,7 +33,7 @@ export class LinkPickerCustomElement {
   }
 
   done() {
-    this.showPicker = false;
-    this.showAddBtn = true;
+    this.editMode = false;
+    this.showEditBtn = true;
   }
 }

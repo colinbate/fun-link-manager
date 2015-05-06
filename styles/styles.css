@@ -70,6 +70,33 @@ section.grid {
     border-bottom-right-radius: 4px;
 }
 
+body[aurelia-app] .btn-group > .btn:first-of-type {
+    border-bottom-left-radius: 4px !important;
+    border-top-left-radius: 4px !important;
+}
+
+body[aurelia-app] .btn-group > .btn:not(:first-of-type) {
+    margin-left: -1px;
+}
+
+body[aurelia-app] .btn-group > .btn:last-of-type {
+    border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
 a[role="button"] {
     cursor: pointer;
+}
+
+.backlog-link .panel-heading .btn-group {
+    float: right;
+}
+
+.input-height {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.panel-body p:last-of-type {
+    margin-bottom: 0;
 }
