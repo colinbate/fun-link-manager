@@ -2,7 +2,7 @@ import {inject} from 'aurelia-framework';
 import LinkProvider from './data/links';
 
 let populate = function () {
-  return this.links.getAll(false).then(allLinks => {
+  return this.links.getAll().then(allLinks => {
     this.backlog = allLinks;
   });
 };
@@ -43,9 +43,9 @@ export class Backlog {
       link.editing = true;
       link.showSave = true;
       link.former = {
-        name: link.doc.name,
-        url: link.doc.url,
-        description: link.doc.description
+        name: link.name,
+        url: link.url,
+        description: link.description
       };
     }
   }
@@ -55,7 +55,7 @@ export class Backlog {
       // Save
       link.saving = true;
       link.showSave = false;
-      this.links.save(link.doc).then(r => {
+      this.links.save(link).then(r => {
         link.saving = false;
         link.editing = false;
         delete link.former;
@@ -65,9 +65,9 @@ export class Backlog {
 
   cancelEdit(link) {
     if (link.editing) {
-      link.doc.name = link.former.name;
-      link.doc.url = link.former.url;
-      link.doc.description = link.former.description;
+      link.name = link.former.name;
+      link.url = link.former.url;
+      link.description = link.former.description;
       delete link.former;
       link.editing = false;
       link.showSave = false;

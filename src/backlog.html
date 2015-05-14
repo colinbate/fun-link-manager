@@ -21,10 +21,10 @@
   <section>
       <h2>${heading} <button class="btn btn-default" click.delegate="openForm()">Add Link</button></h2>
       <div class="backlog-links">
-        <div class="backlog-link panel panel-${link.doc.pending ? 'warning' : 'info'}" repeat.for="link of backlog">
+        <div class="backlog-link panel panel-${link.pending ? 'warning' : 'info'}" repeat.for="link of backlog">
           <div class="panel-heading">
             <div class="btn-group" role="group" aria-label="controls" show.bind="!link.editing">
-              <button type="button" class="btn btn-default" click.delegate="$parent.unlock(link.doc)" if.bind="link.doc.pending" aria-label="Unlock" title="Unlock"><i class="fa fa-lock"></i></button>
+              <button type="button" class="btn btn-default" click.delegate="$parent.unlock(link)" if.bind="link.pending" aria-label="Unlock" title="Unlock"><i class="fa fa-lock"></i></button>
               <button type="button" class="btn btn-default" click.delegate="$parent.edit(link)" aria-label="Edit" title="Edit"><i class="fa fa-pencil"></i></button>
               <button type="button" class="btn btn-danger" aria-label="Delete" title="Delete"><i class="fa fa-trash"></i></button>
             </div>
@@ -33,16 +33,16 @@
               <button type="button" class="btn btn-default" click.delegate="$parent.cancelEdit(link)" aria-label="Cancel" title="Cancel"><i class="fa fa-close text-danger"></i></button>
             </div>
             <div show.bind="!!link.saving"><i class="fa fa-spin fa-spinner"></i></div>
-            <div class="input-height" show.bind="!link.editing">${link.doc.name}</div>
-            <input type="text" value.bind="link.doc.name" style="width: 50%" class="form-control" show.bind="!!link.editing">
+            <div class="input-height" show.bind="!link.editing">${link.name}</div>
+            <input type="text" value.bind="link.name" style="width: 50%" class="form-control" show.bind="!!link.editing">
           </div>
           <div class="list-group">
-            <a class="list-group-item" href.bind="link.url" show.bind="!link.editing">${link.doc.url}</a>
-            <span class="list-group-item" show.bind="!!link.editing"><input type="text" value.bind="link.doc.url" class="form-control"></span>
+            <a class="list-group-item" href.bind="link.url" show.bind="!link.editing">${link.url}</a>
+            <span class="list-group-item" show.bind="!!link.editing"><input type="text" value.bind="link.url" class="form-control"></span>
           </div>
           <div class="panel-body">
-            <div show.bind="!link.editing">${link.doc.description}</div>
-            <textarea value.bind="link.doc.description" class="form-control" show.bind="!!link.editing"></textarea>
+            <div show.bind="!link.editing">${link.description}</div>
+            <textarea value.bind="link.description" class="form-control" show.bind="!!link.editing"></textarea>
           </div>
         </div>
       </div>

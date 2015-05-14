@@ -3,8 +3,10 @@
     <div class="link-picker-display">
       <ul class="list-group">
         <li repeat.for="link of selectedLinks" class="list-group-item">
-          <i class="fa fa-bars pull-right"></i>
-          <div>${link.name}</div>
+          <div class="pull-right" show.bind="$parent.editMode">
+            <i class="fa fa-bars sort-handle"></i>
+          </div>
+          <div><button type="button" class="btn btn-danger btn-xs" style="margin-right: 0.5em;" show.bind="$parent.editMode"><i class="fa fa-close"></i></button>${link.name}</div>
         </li>
       </ul>
       <button class="btn btn-default" type="button" click.delegate="editLinks()" show.bind="showEditBtn">Edit Links</button>
