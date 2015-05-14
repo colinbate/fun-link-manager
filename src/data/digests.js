@@ -1,13 +1,8 @@
 import Resource from './resource';
+import Digest from '../models/digest';
 
 export default class DigestProvider extends Resource {
   constructor() {
-    super('digests-test', () => {
-      return {
-        date: null,
-        intro: null,
-        links: []
-      };
-    });
+    super('digests-test', Digest);
   }
 }

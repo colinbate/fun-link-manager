@@ -1,54 +1,46 @@
 import PouchDb from 'pouchdb';
 
 export default class Resource {
-  constructor(dbname, defaultFac) {
-    defaultFac = defaultFac || function () { return {}; };
-    window.PouchDb = PouchDb;
+  constructor(dbname, ModelType) {
+    //window.PouchDb = PouchDb;
     this.db = new PouchDb(dbname);
-    this.defaultFac = defaultFac;
+    this.ModelType = ModelType;
   }
   getAll(remap = true) {
     return this.db.allDocs({include_docs: true, descending: true}).then(res => {
       if (remap) {
-        return res.rows.map(r => r.doc);
+        return res.rows.map(r => new this.ModelType(r.doc));
       } else {
         return res.rows;
       }
     });
   }
   get(id) {
-    return this.db.get(id).catch(err => {
+    return this.db.get(id).then(doc => {
+      return new this.ModelType(doc);
+    }).catch(err => {
       if (err.status === 404) {
-        return this.defaultFac(id);
+        return new this.ModelType(id);
       } else {
         throw err;
       }
     });
   }
-  save(doc) {
-    let modTime = (new Date()).toJSON();
-    if (!doc.hasOwnProperty('added')) {
-      doc.added = modTime;
-    }
-    if (!doc.hasOwnProperty('_id')) {
-      doc._id = modTime;
-    }
-    doc.saved = modTime;
-    let meta = doc._;
-    delete doc._;
+  save(model) {
+    model.touch();
+    let doc = model.toJSON();
     return this.db.put(doc).then(res => {
-      doc._ = meta;
       if (res.ok) {
-        res.doc = doc;
+        model._rev = res.rev;
       }
       return res;
     });
   }
-  remove(doc) {
-    return this.db.remove(doc);
+  remove(model) {
+    return this.db.remove(model.toJSON());
   }
   empty() {
-    return this.defaultFac();
+    return new this.ModelType();
   }
   saveFrom(vm, into) {
     into = into || this.empty();

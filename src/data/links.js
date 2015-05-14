@@ -1,14 +1,8 @@
 import Resource from './resource';
+import Link from '../models/link';
 
 export default class LinkProvider extends Resource {
   constructor() {
-    super('links-test2', () => {
-      return {
-        name: null,
-        url: null,
-        description: null,
-        tags: []
-      };
-    });
+    super('links-test2', Link);
   }
 }
