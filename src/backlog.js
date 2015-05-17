@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-framework';
-import LinkProvider from './data/links';
+import LinkProvider from './links/provider';
 
 let populate = function () {
   return this.links.getAll().then(allLinks => {

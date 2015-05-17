@@ -1,32 +1,16 @@
 <template>
-  <require from="./components/link-picker"></require>
   <section class="grid">
-    <h2 class="col-sm-12">Create A Link Digest</h2>
     <div>
       <div class="col-sm-4">
-        <div class="list-group">
-          <a repeat.for="digest of openDigests" role="button" class="list-group-item ${digest._id === $parent.activeDigest._id ? 'active' : ''}" click.delegate="$parent.setActive(digest)">${digest.date}</a>
+        <div style="margin: 20px 0;">
+          <a class="btn btn-success" route-href="route: newDigest">New Digest</a>
         </div>
-        <ul if.bind="!areOpenDigests" class="list-group">
-          <li class="list-group-item list-group-item-info">No Open Digests</li>
-        </ul>
+        <div class="list-group">
+          <a repeat.for="digest of openDigests" class="list-group-item ${digest._id === current.id ? 'active' : ''}" route-href="route: singleDigest; params.bind: {id:digest._id}">${digest.date}</a>
+        </div>
       </div>
       <div class="col-sm-8">
-        <form role="form" submit.delegate="save()">
-          <div class="form-group">
-            <label for="ddate">Date</label>
-            <input type="text" value.bind="digestVm.date" class="form-control" id="ddate" placeholder="Date">
-          </div>
-          <div class="form-group">
-            <label for="dintro">Description</label>
-            <textarea value.bind="digestVm.intro" class="form-control" id="dintro"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="dlinks">Links</label>
-            <link-picker selected-links.bind="digestVm.links"></link-picker>
-          </div>
-          <button type="submit" class="btn btn-primary">Save Digest</button>
-        </form>
+        <router-view></router-view>
       </div>
     </div>
   </section>
