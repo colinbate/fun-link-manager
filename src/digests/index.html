@@ -1,0 +1,8 @@
+<template>
+  <div class="btn-group" role="group" aria-label="digest options" style="margin: 20px 0;">
+    <a class="btn btn-default ${row.isActive ? 'active' : ''}" repeat.for="row of router.navigation" href.bind="row.href">${row.title}</a>
+  </div>
+  <div class="digest-panel">
+    <router-view></router-view>
+  </div>
+</template>

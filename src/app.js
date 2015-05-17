@@ -1,19 +1,16 @@
-import {inject} from 'aurelia-framework';
-import {Router} from 'aurelia-router';
 import 'bootstrap';
 import 'bootstrap/css/bootstrap.css!';
 
-@inject(Router)
 export class App {
-  constructor(router) {
+  configureRouter(config, router) {
+    config.title = 'Fun Link Manager';
+    config.map([
+      { route: 'digests',  moduleId: './welcome', nav: true, title:'Digests' },
+      { route: 'backlog',  moduleId: './backlog', nav: true, title:'Link Backlog' },
+      { route: 'endpoints',  moduleId: './endpoints/list', nav: true, title:'Remote Endpoints' },
+      { route: '', redirect: 'digests' }
+    ]);
+
     this.router = router;
-    this.router.configure(config => {
-      config.title = 'Fun Link Manager';
-      config.map([
-        { route: ['','welcome'],  moduleId: './welcome',      nav: true, title:'Create Digest' },
-        { route: 'backlog',       moduleId: './backlog',      nav: true, title:'Link Backlog' },
-        { route: 'child-router',  moduleId: './child-router', nav: true, title:'Published Digests' }
-      ]);
-    });
   }
 }

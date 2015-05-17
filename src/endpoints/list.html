@@ -1,0 +1,41 @@
+<template>
+  <section class="add-item ${addState}">
+    <h3>Add Endpoint <button class="btn btn-default btn-sm" click.delegate="closeForm()"><i class="fa fa-close"></i></button></h3>
+
+    <form role="form" submit.delegate="saveNew()">
+      <div class="form-group">
+        <label for="ltitle">Name</label>
+        <input type="text" value.bind="endpointVm.name" class="form-control" id="ltitle" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label for="lurl">URL</label>
+        <input type="text" value.bind="endpointVm.url" class="form-control" id="lurl" placeholder="URL">
+      </div>
+      <button type="submit" class="btn btn-primary">Save Endpoint</button>
+    </form>
+  </section>
+  <section>
+      <h2>${heading} <button class="btn btn-default" click.delegate="openForm()">Add Endpoint</button></h2>
+      <div class="item-list">
+        <div class="panel panel-${item.pending ? 'warning' : 'info'}" repeat.for="item of list">
+          <div class="panel-heading">
+            <div class="btn-group" role="group" aria-label="controls" show.bind="!item.editing">
+              <button type="button" class="btn btn-default" click.delegate="$parent.edit(item)" aria-label="Edit" title="Edit"><i class="fa fa-pencil"></i></button>
+              <button type="button" class="btn btn-danger" aria-label="Delete" title="Delete"><i class="fa fa-trash"></i></button>
+            </div>
+            <div class="btn-group" role="group" aria-label="controls" show.bind="!!item.showSave">
+              <button type="button" class="btn btn-default" click.delegate="$parent.saveEdit(item)" aria-label="Save" title="Save"><i class="fa fa-check text-success"></i></button>
+              <button type="button" class="btn btn-default" click.delegate="$parent.cancelEdit(item)" aria-label="Cancel" title="Cancel"><i class="fa fa-close text-danger"></i></button>
+            </div>
+            <div show.bind="!!item.saving"><i class="fa fa-spin fa-spinner"></i></div>
+            <div class="input-height" show.bind="!item.editing">${item.name}</div>
+            <input type="text" value.bind="item.name" style="width: 50%" class="form-control" show.bind="!!item.editing">
+          </div>
+          <div class="list-group">
+            <a class="list-group-item" href.bind="item.url" show.bind="!item.editing">${item.url}</a>
+            <span class="list-group-item" show.bind="!!item.editing"><input type="text" value.bind="item.url" class="form-control"></span>
+          </div>
+        </div>
+      </div>
+  </section>
+</template>

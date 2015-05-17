@@ -1,5 +1,5 @@
 <template>
-  <section class="add-link ${addLinkState}">
+  <section class="add-item ${addLinkState}">
     <h3>Add Link <button class="btn btn-default btn-sm" click.delegate="closeForm()"><i class="fa fa-close"></i></button></h3>
 
     <form role="form" submit.delegate="save()">
@@ -20,7 +20,7 @@
   </section>
   <section>
       <h2>${heading} <button class="btn btn-default" click.delegate="openForm()">Add Link</button></h2>
-      <div class="backlog-links">
+      <div class="backlog-links item-list">
         <div class="backlog-link panel panel-${link.pending ? 'warning' : 'info'}" repeat.for="link of backlog">
           <div class="panel-heading">
             <div class="btn-group" role="group" aria-label="controls" show.bind="!link.editing">

@@ -49,18 +49,18 @@ section.grid {
     max-width: 425px;
 }
 
-.add-link.closed {
+.add-item.closed {
     display: none;
 }
 
-.add-link.open {
+.add-item.open {
     background-color: #eef;
     margin: 0;
     padding: 20px;
     border-bottom: 1px solid #ccd;
 }
 
-.add-link.open h3 {
+.add-item.open h3 {
     margin: 0;
 }
 
@@ -88,7 +88,7 @@ a[role="button"] {
     cursor: pointer;
 }
 
-.backlog-link .panel-heading .btn-group {
+.item-list .panel-heading .btn-group {
     float: right;
 }
 
@@ -99,4 +99,19 @@ a[role="button"] {
 
 .panel-body p:last-of-type {
     margin-bottom: 0;
+}
+
+.digest-md-viewer pre {
+    white-space: pre-wrap;
+    word-break: normal;
+}
+
+.digest-links {
+    list-style: none;
+    margin: 20px 0 0 0;
+    padding: 0;
+}
+
+.digest-links li {
+    margin: 0 0 20px 0;
 }

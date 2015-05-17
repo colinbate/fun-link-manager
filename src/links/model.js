@@ -1,4 +1,4 @@
-import PouchModel from './pouch';
+import PouchModel from '../common/pouch-model';
 
 export default class Link extends PouchModel {
   constructor(doc = {}) {

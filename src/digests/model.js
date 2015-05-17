@@ -1,5 +1,5 @@
-import PouchModel from './pouch';
-import Link from './link';
+import PouchModel from '../common/pouch-model';
+import Link from '../links/model';
 
 export default class Digest extends PouchModel {
   constructor(doc = {}) {
@@ -22,4 +22,5 @@ export default class Digest extends PouchModel {
 
 ${linktext}`;
   }
+
 }

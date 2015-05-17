@@ -1,5 +1,5 @@
 import {bindable, inject} from 'aurelia-framework';
-import LinkProvider from '../data/links';
+import LinkProvider from '../links/provider';
 
 @inject(LinkProvider)
 @bindable({

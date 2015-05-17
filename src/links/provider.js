@@ -1,5 +1,5 @@
-import Resource from './resource';
-import Link from '../models/link';
+import Resource from '../common/resource';
+import Link from './model';
 
 export default class LinkProvider extends Resource {
   constructor() {

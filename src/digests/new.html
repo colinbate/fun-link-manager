@@ -1,0 +1,19 @@
+<template>
+  <require from="../components/link-picker"></require>
+  <h2>Create A New Link Digest</h2>
+  <form role="form" submit.delegate="save()">
+    <div class="form-group">
+      <label for="ddate">Date</label>
+      <input type="text" value.bind="digestVm.date" class="form-control" id="ddate" placeholder="Date">
+    </div>
+    <div class="form-group">
+      <label for="dintro">Description</label>
+      <textarea value.bind="digestVm.intro" class="form-control" id="dintro"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="dlinks">Links</label>
+      <link-picker selected-links.bind="digestVm.links"></link-picker>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Digest</button>
+  </form>
+</template>
