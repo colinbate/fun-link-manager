@@ -12,3 +12,4 @@ karma*
 testdb.html
 doc/**
 pouchdb*
+.DS_Store
