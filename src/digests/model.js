@@ -7,12 +7,14 @@ export default class Digest extends PouchModel {
     this.date = doc.date;
     this.intro = doc.intro;
     this.links = doc.links.map(l => new Link(l));
+    this.published = doc.published;
   }
   toJSON() {
     let doc = {
       date: this.date,
       intro: this.intro,
-      links: this.links.map(l => l.toJSON())
+      links: this.links.map(l => l.toJSON()),
+      published: this.published
     };
     return super.toJSON(doc);
   }

@@ -1,10 +1,31 @@
 import PouchDb from 'pouchdb';
 
+let syncOpts = {
+  live: true,
+  retry: true
+};
+
+let consoleLogger = function (name) {
+  return function (x) {
+    if (window.console) {
+      window.console.log(name, x);
+    }
+  };
+};
+
+
 export default class Resource {
   constructor(dbname, ModelType) {
     //window.PouchDb = PouchDb;
     this.db = new PouchDb(dbname);
+    this._remote = new PouchDb('http://funlinks.iriscouch.com/' + dbname);
     this.ModelType = ModelType;
+
+    this.db.sync(this._remote, syncOpts)
+      .on('change', consoleLogger('CHANGE'))
+      .on('paused', consoleLogger('PAUSED'))
+      .on('active', consoleLogger('ACTIVE'))
+      .on('error', consoleLogger('ERROR'));
   }
   getAll(remap = true) {
     return this.db.allDocs({include_docs: true, descending: true}).then(res => {

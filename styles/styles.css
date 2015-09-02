@@ -115,3 +115,7 @@ a[role="button"] {
 .digest-links li {
     margin: 0 0 20px 0;
 }
+
+table.data-table > tbody > tr > td {
+    vertical-align: middle;
+}
