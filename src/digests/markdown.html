@@ -1,13 +1,29 @@
 <template>
+  <require from="../common/default-value-converter"></require>
+  <require from="../components/alert-centre"></require>
   <div class="digest-md-viewer">
-    <pre>+++
-title = "Fun Links ${digest.date}"
-categories = ["Fun Links"]
-+++
-${digest.intro}
-
-<template repeat.for="link of digest.links">${link.toMarkdown()}
-
-</template></pre>
+    <pre>${getMarkdownFor()}</pre>
+  </div>
+  <div alert-centre="digest-markdown"></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">Publishing Targets</div>
+    <table class="table data-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Date Published</th>
+          <th>ID</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr repeat.for="ep of digest.targets">
+          <td>${ep.name}</td>
+          <td>${ep.date | def:'-'}</td>
+          <td>${ep.id | def:'-'}</td>
+          <td><button type="button" class="btn btn-default" click.delegate="$parent.post(ep)">${ep.action}</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
